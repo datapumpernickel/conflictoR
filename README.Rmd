@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# conflictoR
+# conflictoR <img src="man/figures/logo.png" align="right" height="139" alt="" />
 
 <!-- badges: start -->
 [![](https://www.r-pkg.org/badges/version/conflictoR?color=orange)](https://cran.r-project.org/package=conflictoR)
