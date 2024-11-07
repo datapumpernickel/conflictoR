@@ -5,16 +5,10 @@
 
 <!-- badges: start -->
 
-![CRAN Status](https://img.shields.io/badge/CRAN-Unpublished-red.svg)
-![Project
-Status](https://img.shields.io/badge/status-under--construction-orange.svg)
-![R Version](https://img.shields.io/badge/R-%3E%3D%204.0.0-blue.svg)
-![License](https://img.shields.io/badge/license-MIT-green.svg) ![Build
-Status](https://img.shields.io/github/actions/workflow/status/datapumpernickel/conflictoR/r.yml)
-![Last
-Commit](https://img.shields.io/github/last-commit/datapumpernickel/conflictoR)
-![GitHub Repo
-stars](https://img.shields.io/github/stars/datapumpernickel/conflictoR?style=social)
+[![](https://www.r-pkg.org/badges/version/conflictoR?color=orange)](https://cran.r-project.org/package=conflictoR)
+[![](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![License:
+MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://cran.r-project.org/web/licenses/MIT)
 
 <!-- badges: end -->
 
