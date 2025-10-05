@@ -50,21 +50,17 @@ state_conflicts <- cl_get_data(
   resource = "ucdpprioconflict",
   version = "24.1"
 )
-
 # Get non-state conflict data
 nonstate_conflicts <- cl_get_data(
   resource = "nonstate",
   version = "24.1"
 )
-
 # Get one-sided violence data
 onesided_conflicts <- cl_get_data(
   resource = "onesided",
   version = "24.1"
 )
 ```
-
-## Exploring the Data
 
 Let's examine the structure of the data:
 
@@ -93,9 +89,6 @@ recent_conflicts <- cl_get_data(
 
 One common analysis is tracking conflict counts over time:
 
-## Visualizing Conflict Trends
-
-One common analysis is tracking conflict counts over time:
 
 ```{r prep-viz-data, message=FALSE}
 ## making a dataframe with all combinations of datasets and versions
@@ -177,8 +170,6 @@ ggplot(data = clean_full_data |>
     legend.background = element_rect(fill = "black", color = NA)
   )
 ```
-
-
 
 ## Working with Event Data (GED)
 
