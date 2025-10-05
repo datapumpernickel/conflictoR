@@ -36,6 +36,7 @@
       <ul class="navbar-nav me-auto">
 <li class="active nav-item"><a class="nav-link" href="../articles/conflictoR.html">Get started</a></li>
 <li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul>
 <ul class="navbar-nav">
 <li class="nav-item"><form class="form-inline" role="search">
@@ -95,22 +96,16 @@ parameters:</p>
 <span>  resource <span class="op">=</span> <span class="st">"ucdpprioconflict"</span>,</span>
 <span>  version <span class="op">=</span> <span class="st">"24.1"</span></span>
 <span><span class="op">)</span></span>
-<span></span>
 <span><span class="co"># Get non-state conflict data</span></span>
 <span><span class="va">nonstate_conflicts</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/cl_get_data.html">cl_get_data</a></span><span class="op">(</span></span>
 <span>  resource <span class="op">=</span> <span class="st">"nonstate"</span>,</span>
 <span>  version <span class="op">=</span> <span class="st">"24.1"</span></span>
 <span><span class="op">)</span></span>
-<span></span>
 <span><span class="co"># Get one-sided violence data</span></span>
 <span><span class="va">onesided_conflicts</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/cl_get_data.html">cl_get_data</a></span><span class="op">(</span></span>
 <span>  resource <span class="op">=</span> <span class="st">"onesided"</span>,</span>
 <span>  version <span class="op">=</span> <span class="st">"24.1"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level2">
-<h2 id="exploring-the-data">Exploring the Data<a class="anchor" aria-label="anchor" href="#exploring-the-data"></a>
-</h2>
 <p>Let’s examine the structure of the data:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># View first few rows</span></span>
@@ -179,11 +174,6 @@ parameters:</p>
 </div>
 <div class="section level2">
 <h2 id="visualizing-conflict-trends">Visualizing Conflict Trends<a class="anchor" aria-label="anchor" href="#visualizing-conflict-trends"></a>
-</h2>
-<p>One common analysis is tracking conflict counts over time:</p>
-</div>
-<div class="section level2">
-<h2 id="visualizing-conflict-trends-1">Visualizing Conflict Trends<a class="anchor" aria-label="anchor" href="#visualizing-conflict-trends-1"></a>
 </h2>
 <p>One common analysis is tracking conflict counts over time:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
