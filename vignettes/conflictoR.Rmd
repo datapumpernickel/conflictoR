@@ -1,0 +1,230 @@
+---
+title: "conflictoR"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{conflictoR}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7,
+  fig.height = 5
+)
+```
+
+```{r setup, message = F, warning = F}
+library(conflictoR)
+library(dplyr)
+library(ggplot2)
+```
+
+## Overview
+
+The **conflictoR** package provides easy access to the Uppsala Conflict Data Program (UCDP) API, allowing you to retrieve and analyze conflict data directly in R. UCDP is the world's main provider of data on organized violence, offering datasets on state-based conflicts, non-state conflicts, and one-sided violence.
+
+## Basic Usage
+
+The main function in conflictoR is `cl_get_data()`, which retrieves datasets from the UCDP API. You need to specify two parameters:
+
+- `resource`: The type of conflict data (e.g., "ucdpprioconflict", "nonstate", "onesided")
+- `version`: The version of the dataset (e.g., "24.1", "23.1")
+
+```{r load-data, echo=FALSE}
+# Load pre-saved sample data for vignette
+# In real usage, you would use: cl_get_data("ucdpprioconflict", "24.1")
+v_data <- system.file("extdata", "vignette_sample_data.rda", package = "conflictoR")
+if (!file.exists(v_data)) {
+  stop("internal vignette data set '~/extdata/vignette_sample_data.rda' not found",
+       call. = FALSE)
+}
+load(v_data)
+```
+
+```{r example-call, eval=FALSE}
+# Get state-based conflict data
+state_conflicts <- cl_get_data(
+  resource = "ucdpprioconflict",
+  version = "24.1"
+)
+
+# Get non-state conflict data
+nonstate_conflicts <- cl_get_data(
+  resource = "nonstate",
+  version = "24.1"
+)
+
+# Get one-sided violence data
+onesided_conflicts <- cl_get_data(
+  resource = "onesided",
+  version = "24.1"
+)
+```
+
+## Exploring the Data
+
+Let's examine the structure of the data:
+
+```{r explore-data}
+# View first few rows
+head(state_conflicts)
+
+# Check available columns
+names(state_conflicts)
+```
+
+## Filtering Data
+
+You can filter data directly in the API call using various parameters:
+
+```{r filtering, eval=FALSE}
+# Get conflicts for specific years
+recent_conflicts <- cl_get_data(
+  resource = "ucdpprioconflict",
+  version = "24.1",
+  year = c(2020, 2021, 2022, 2023)
+)
+```
+
+## Visualizing Conflict Trends
+
+One common analysis is tracking conflict counts over time:
+
+## Visualizing Conflict Trends
+
+One common analysis is tracking conflict counts over time:
+
+```{r prep-viz-data, message=FALSE}
+## making a dataframe with all combinations of datasets and versions
+datasets  = c("ucdpprioconflict", "nonstate", "onesided")
+version <- "24.1"
+
+## querying this data using the conflictoR package
+state <- state_conflicts |> 
+  select(year, conflict_id, version) |>
+  mutate(
+    dataset = datasets[1],
+    year = as.character(year),
+    version = "24.1"
+  ) 
+
+nonstate <- nonstate_conflicts |> 
+  select(year, conflict_id, version) |>
+  mutate(
+    dataset = datasets[2],
+    year = as.character(year),
+    version = "24.1"
+  ) 
+
+onesided <- onesided_conflicts |> 
+  select(year, conflict_id, version) |>
+  mutate(
+    dataset = datasets[3],
+    year = as.character(year),
+    version = "24.1"
+  ) 
+
+## clean the data to count actual conflicts and merge the sets
+clean_full_data <- bind_rows(state,
+                             nonstate,
+                             onesided) |>
+  count(year, version, dataset) |> 
+  group_by(year, dataset) |> 
+  mutate(year = as.numeric(year))
+```
+
+```{r plot-trends, fig.width=7, fig.height=4, message=F, warning=F}
+
+colors <- c(
+  "ucdpprioconflict" = "#D55E00",    # red for State-Based Violence
+  "nonstate" = "#009E73",            # green for Non-State Violence
+  "onesided" = "#F0E442"             # yellow for One-Sided Violence
+)
+
+labels <- c(
+  "ucdpprioconflict" = "State-Based Violence",
+  "nonstate" = "Non-State Violence",
+  "onesided" = "One-Sided Violence"
+)
+
+# Generate the plot
+ggplot(data = clean_full_data |> 
+         filter(year >= 1975 & year <= 2023, version == "24.1")) +
+  geom_line(aes(x = year, y = n, color = dataset, group = dataset), size = 1) +
+  geom_point(aes(x = year, y = n, color = dataset), size = 2) +
+  scale_color_manual(values = colors, 
+                     labels = labels) +
+  labs(title = "Number of Conflicts", subtitle = "1975-2023", caption = "Uppsala Conflict Data Center, ucdp.uu.se, using version 24.1 of resources 'ucdpprioconflict', 'onesided', 'nonstate'") +
+  scale_x_continuous(breaks = seq(1975, 2023, 5)) +
+  scale_y_continuous(breaks = seq(0, 100, 20), limits = c(0,100)) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.background = element_rect(fill = "black", color = NA),
+    panel.background = element_rect(fill = "black", color = NA),
+    panel.grid.major = element_line(color = "grey20"),
+    panel.grid.minor = element_line(color = "grey30"),
+    axis.text = element_text(color = "white"),
+    plot.caption = element_text(color = "white", face = "italic", size = 7),
+    axis.title = element_blank(),
+    plot.title = element_text(color = "white", size = 16, face = "bold"),
+    plot.subtitle = element_text(color = "white", size = 12),
+    legend.position = "bottom",
+    legend.title = element_blank(),
+    legend.text = element_text(color = "white", size = 10),
+    legend.background = element_rect(fill = "black", color = NA)
+  )
+```
+
+
+
+## Working with Event Data (GED)
+
+For more granular analysis, use the Georeferenced Event Dataset:
+
+```{r ged-example, eval=FALSE}
+# Get event-level data for a specific region and time period
+syria_events <- cl_get_data(
+  resource = "gedevents",
+  version = "24.1",
+  country = 652,
+  start_date = "2020-01-01",
+  end_date = "2020-12-31"
+)
+
+```
+
+## Available Resources
+
+conflictoR supports the following UCDP resources:
+
+| Resource | Description |
+|----------|-------------|
+| `ucdpprioconflict` | State-based armed conflicts |
+| `dyadic` | Dyadic-level conflict data |
+| `battledeaths` | Battle-related deaths |
+| `nonstate` | Non-state conflicts |
+| `onesided` | One-sided violence against civilians |
+| `gedevents` | Georeferenced event dataset (GED) |
+
+## Best Practices
+
+1. **Always specify the version**: This ensures reproducibility of your analysis
+2. **Use filters**: API filters are more efficient than downloading all data and filtering locally
+3. **Check the documentation**: Different resources accept different parameters
+4. **Cite your sources**: Always cite UCDP and specify the version used
+
+## Further Resources
+
+- [UCDP Website](https://ucdp.uu.se/)
+- [UCDP API Documentation](https://ucdp.uu.se/apidocs/)
+- [Package Repository](https://github.com/datapumpernickel/conflictoR)
+
+## Getting Help
+
+If you encounter any issues or have questions:
+
+- Open an issue on GitHub: https://github.com/datapumpernickel/conflictoR/issues
+- Check the function documentation: `?cl_get_data`

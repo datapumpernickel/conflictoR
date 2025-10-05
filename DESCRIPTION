@@ -17,3 +17,12 @@ Imports:
     purrr,
     rlang
 URL: https://datapumpernickel.github.io/conflictoR/
+Suggests: 
+    knitr,
+    rmarkdown,
+    ggplot2,
+    dplyr
+VignetteBuilder: knitr
+Depends: 
+    R (>= 3.5)
+LazyData: true
