@@ -16,6 +16,8 @@ cl_build_request(resource, version, pagesize, page, params)
 \item{page}{An integer or vector of integers indicating the page number(s) to request.
 If a single number is provided, the function returns a single request; if a vector of numbers is provided,
 a list of requests is returned.}
+
+\item{params}{A list of validated params returned by \code{cl_check_params}.}
 }
 \value{
 If a single page number is provided, the function returns a \code{httr2_request} object.

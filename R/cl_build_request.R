@@ -12,6 +12,7 @@
 #' @param page An integer or vector of integers indicating the page number(s) to request.
 #' If a single number is provided, the function returns a single request; if a vector of numbers is provided,
 #' a list of requests is returned.
+#' @param params A list of validated params returned by `cl_check_params`.
 #'
 #' @return If a single page number is provided, the function returns a `httr2_request` object.
 #' If multiple page numbers are provided, the function returns a list of `httr2_request` objects.

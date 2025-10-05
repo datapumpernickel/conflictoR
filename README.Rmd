@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 [![](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://cran.r-project.org/web/licenses/MIT)
 
-
+[![R-CMD-check](https://github.com/datapumpernickel/conflictoR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/datapumpernickel/conflictoR/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of conflictoR is to provide a user-friendly R interface for accessing and analyzing conflict data from the Uppsala Conflict Data Program (UCDP) API. With conflictoR, you can dynamically fetch, filter, and analyze conflict datasets directly from the source, streamlining research and data analysis workflows related to global conflicts.
