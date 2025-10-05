@@ -13,7 +13,12 @@ cl_get_data(
   conflict_incompatibility = NULL,
   dyad = NULL,
   org = NULL,
-  conflict_type = NULL
+  conflict_type = NULL,
+  geography = NULL,
+  start_date = NULL,
+  end_date = NULL,
+  type_of_violence = NULL,
+  actor = NULL
 )
 }
 \arguments{
@@ -25,6 +30,7 @@ Must be one of:
 \item \code{"battledeaths"}: Data on battle-related deaths.
 \item \code{"nonstate"}: Non-state conflicts data.
 \item \code{"onesided"}: Data on one-sided violence.
+\item \code{"gedevents"}: Event-based conflict data from the UCDP GED.
 }}
 
 \item{version}{A character string specifying the version of the resource to request.}
@@ -57,7 +63,7 @@ Must be one of:
 
 \item{dyad}{A vector of numeric dyad IDs.
 \itemize{
-\item Valid for \code{"dyadic"}, \code{"battledeaths"}, and \code{"onesided"} resources.
+\item Valid for \code{"gedevents"}, \code{"dyadic"}, \code{"battledeaths"}, and \code{"onesided"} resources.
 \item Not valid for \code{"ucdpprioconflict"} and \code{"nonstate"} resources.
 \item Must be a numeric vector representing dyad IDs.
 }}
@@ -65,15 +71,46 @@ Must be one of:
 \item{org}{A vector of numeric organization IDs.
 \itemize{
 \item Valid only for the \code{"nonstate"} resource.
-\item Not valid for \code{"ucdpprioconflict"}, \code{"dyadic"}, \code{"battledeaths"}, and \code{"onesided"} resources.
+\item Not valid for \code{"ucdpprioconflict"}, \code{"dyadic"}, \code{"battledeaths"}, \code{"onesided"}, and \code{"gedevents"} resources.
 \item Must be a numeric vector representing organization IDs.
 }}
 
 \item{conflict_type}{A vector of numeric conflict type codes.
 \itemize{
 \item Valid for \code{"ucdpprioconflict"}, \code{"dyadic"}, and \code{"battledeaths"} resources.
-\item Not valid for \code{"nonstate"} and \code{"onesided"} resources.
+\item Not valid for \code{"nonstate"}, \code{"onesided"}, and \code{"gedevents"} resources.
 \item Must be a numeric vector representing conflict type codes.
+}}
+
+\item{geography}{A string specifying the geographic bounding box in the format "y0 x0,y1 x1".
+\itemize{
+\item Valid only for the \code{"gedevents"} resource.
+\item Format: Two coordinates describing the bounding box (latitude and longitude).
+\item Example: \code{"40 -75,41 -73"} for New York City.
+}}
+
+\item{start_date}{A string specifying the start date in "YYYY-MM-DD" format.
+\itemize{
+\item Valid only for the \code{"gedevents"} resource.
+\item Must specify the date from which events have definitely happened.
+}}
+
+\item{end_date}{A string specifying the end date in "YYYY-MM-DD" format.
+\itemize{
+\item Valid only for the \code{"gedevents"} resource.
+\item Must specify the date up to which events have definitely happened.
+}}
+
+\item{type_of_violence}{A vector of numeric violence type codes.
+\itemize{
+\item Valid only for the \code{"gedevents"} resource.
+\item Must be a numeric vector representing types of violence.
+}}
+
+\item{actor}{A vector of numeric actor IDs.
+\itemize{
+\item Valid only for the \code{"gedevents"} resource.
+\item Must be a numeric vector representing actor IDs.
 }}
 }
 \value{

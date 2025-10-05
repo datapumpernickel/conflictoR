@@ -16,8 +16,9 @@ The goal of conflictoR is to provide a user-friendly R interface for
 accessing and analyzing conflict data from the Uppsala Conflict Data
 Program (UCDP) API. With conflictoR, you can dynamically fetch, filter,
 and analyze conflict datasets directly from the source, streamlining
-research and data analysis workflows related to global conflicts. \##
-Installation
+research and data analysis workflows related to global conflicts.
+
+## Installation
 
 You can install the development version of conflictoR from
 [GitHub](https://github.com/) with:
