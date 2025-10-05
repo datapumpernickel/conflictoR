@@ -3,7 +3,7 @@ pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
   conflictoR: conflictoR.html
-last_built: 2025-10-05T20:09Z
+last_built: 2025-10-05T20:13Z
 urls:
   reference: https://datapumpernickel.github.io/conflictoR/reference
   article: https://datapumpernickel.github.io/conflictoR/articles
